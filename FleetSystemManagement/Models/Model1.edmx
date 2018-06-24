@@ -1,0 +1,375 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="FleetMSModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Commercial">
+          <Key>
+            <PropertyRef Name="licenseNumber" />
+          </Key>
+          <Property Name="hook" Type="bit" Nullable="false" />
+          <Property Name="licenseNumber" Type="nvarchar" MaxLength="12" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Costumer">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="firstName" Type="nvarchar" MaxLength="20" />
+          <Property Name="lastName" Type="nvarchar" MaxLength="20" />
+          <Property Name="creditName" Type="nvarchar" MaxLength="20" />
+          <Property Name="phone" Type="nvarchar" MaxLength="20" />
+          <Property Name="mail" Type="nvarchar" MaxLength="30" />
+        </EntityType>
+        <EntityType Name="PrivateCar">
+          <Key>
+            <PropertyRef Name="licenseNumber" />
+          </Key>
+          <Property Name="licenseNumber" Type="nvarchar" MaxLength="12" Nullable="false" />
+        </EntityType>
+        <EntityType Name="RentedCars">
+          <Key>
+            <PropertyRef Name="licenseNumber" />
+          </Key>
+          <Property Name="licenseNumber" Type="nvarchar" MaxLength="12" Nullable="false" />
+          <Property Name="costumerID" Type="nvarchar" MaxLength="20" />
+        </EntityType>
+        <EntityType Name="Tender">
+          <Key>
+            <PropertyRef Name="licenseNumber" />
+          </Key>
+          <Property Name="licenseNumber" Type="nvarchar" MaxLength="12" Nullable="false" />
+          <Property Name="box" Type="bit" />
+        </EntityType>
+        <EntityType Name="Truck">
+          <Key>
+            <PropertyRef Name="licenseNumber" />
+          </Key>
+          <Property Name="licenseNumber" Type="nvarchar" MaxLength="12" Nullable="false" />
+          <Property Name="truckType" Type="nvarchar" MaxLength="20" />
+        </EntityType>
+        <EntityType Name="Van">
+          <Key>
+            <PropertyRef Name="licenseNumber" />
+          </Key>
+          <Property Name="licenseNumber" Type="nvarchar" MaxLength="12" Nullable="false" />
+          <Property Name="volume" Type="int" />
+          <Property Name="awning" Type="bit" StoreGeneratedPattern="None" />
+        </EntityType>
+        <EntityType Name="Veichle">
+          <Key>
+            <PropertyRef Name="licenseNumber" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="30" />
+          <Property Name="licenseNumber" Type="nvarchar" MaxLength="12" Nullable="false" />
+          <Property Name="model" Type="int" />
+          <Property Name="price" Type="int" />
+          <Property Name="seatsNumber" Type="int" />
+          <Property Name="company" Type="nvarchar" MaxLength="30" />
+        </EntityType>
+        <Association Name="FK__Commercia__licen__398D8EEE">
+          <End Role="Veichle" Type="Self.Veichle" Multiplicity="1" />
+          <End Role="Commercial" Type="Self.Commercial" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Veichle">
+              <PropertyRef Name="licenseNumber" />
+            </Principal>
+            <Dependent Role="Commercial">
+              <PropertyRef Name="licenseNumber" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__PrivateCa__licen__4222D4EF">
+          <End Role="Veichle" Type="Self.Veichle" Multiplicity="1" />
+          <End Role="PrivateCar" Type="Self.PrivateCar" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Veichle">
+              <PropertyRef Name="licenseNumber" />
+            </Principal>
+            <Dependent Role="PrivateCar">
+              <PropertyRef Name="licenseNumber" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__RentedCar__Costu__3F466844">
+          <End Role="Costumer" Type="Self.Costumer" Multiplicity="0..1" />
+          <End Role="RentedCars" Type="Self.RentedCars" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Costumer">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="RentedCars">
+              <PropertyRef Name="costumerID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__RentedCar__licen__3E52440B">
+          <End Role="Veichle" Type="Self.Veichle" Multiplicity="1" />
+          <End Role="RentedCars" Type="Self.RentedCars" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Veichle">
+              <PropertyRef Name="licenseNumber" />
+            </Principal>
+            <Dependent Role="RentedCars">
+              <PropertyRef Name="licenseNumber" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Tender__licenseN__44FF419A">
+          <End Role="Commercial" Type="Self.Commercial" Multiplicity="1" />
+          <End Role="Tender" Type="Self.Tender" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Commercial">
+              <PropertyRef Name="licenseNumber" />
+            </Principal>
+            <Dependent Role="Tender">
+              <PropertyRef Name="licenseNumber" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Truck__licenseNu__47DBAE45">
+          <End Role="Commercial" Type="Self.Commercial" Multiplicity="1" />
+          <End Role="Truck" Type="Self.Truck" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Commercial">
+              <PropertyRef Name="licenseNumber" />
+            </Principal>
+            <Dependent Role="Truck">
+              <PropertyRef Name="licenseNumber" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Van__licenseNumb__4AB81AF0">
+          <End Role="Veichle" Type="Self.Veichle" Multiplicity="1" />
+          <End Role="Van" Type="Self.Van" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Veichle">
+              <PropertyRef Name="licenseNumber" />
+            </Principal>
+            <Dependent Role="Van">
+              <PropertyRef Name="licenseNumber" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="FleetMSModelStoreContainer">
+          <EntitySet Name="Commercial" EntityType="Self.Commercial" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Costumer" EntityType="Self.Costumer" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PrivateCar" EntityType="Self.PrivateCar" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="RentedCars" EntityType="Self.RentedCars" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Tender" EntityType="Self.Tender" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Truck" EntityType="Self.Truck" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Van" EntityType="Self.Van" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Veichle" EntityType="Self.Veichle" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__Commercia__licen__398D8EEE" Association="Self.FK__Commercia__licen__398D8EEE">
+            <End Role="Veichle" EntitySet="Veichle" />
+            <End Role="Commercial" EntitySet="Commercial" />
+          </AssociationSet>
+          <AssociationSet Name="FK__PrivateCa__licen__4222D4EF" Association="Self.FK__PrivateCa__licen__4222D4EF">
+            <End Role="Veichle" EntitySet="Veichle" />
+            <End Role="PrivateCar" EntitySet="PrivateCar" />
+          </AssociationSet>
+          <AssociationSet Name="FK__RentedCar__Costu__3F466844" Association="Self.FK__RentedCar__Costu__3F466844">
+            <End Role="Costumer" EntitySet="Costumer" />
+            <End Role="RentedCars" EntitySet="RentedCars" />
+          </AssociationSet>
+          <AssociationSet Name="FK__RentedCar__licen__3E52440B" Association="Self.FK__RentedCar__licen__3E52440B">
+            <End Role="Veichle" EntitySet="Veichle" />
+            <End Role="RentedCars" EntitySet="RentedCars" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Tender__licenseN__44FF419A" Association="Self.FK__Tender__licenseN__44FF419A">
+            <End Role="Commercial" EntitySet="Commercial" />
+            <End Role="Tender" EntitySet="Tender" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Truck__licenseNu__47DBAE45" Association="Self.FK__Truck__licenseNu__47DBAE45">
+            <End Role="Commercial" EntitySet="Commercial" />
+            <End Role="Truck" EntitySet="Truck" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Van__licenseNumb__4AB81AF0" Association="Self.FK__Van__licenseNumb__4AB81AF0">
+            <End Role="Veichle" EntitySet="Veichle" />
+            <End Role="Van" EntitySet="Van" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="FleetMSModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Commercial" BaseType="FleetMSModel.Veichle" Abstract="true">
+          <Property Name="hook" Type="Boolean" Nullable="false" a:GetterAccess="Protected" xmlns:a="http://schemas.microsoft.com/ado/2006/04/codegeneration" a:SetterAccess="Protected" />
+        </EntityType>
+        <EntityType Name="Costumer">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" a:GetterAccess="Protected" xmlns:a="http://schemas.microsoft.com/ado/2006/04/codegeneration" a:SetterAccess="Protected" />
+          <Property Name="firstName" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" a:SetterAccess="Protected" xmlns:a="http://schemas.microsoft.com/ado/2006/04/codegeneration" a:GetterAccess="Protected" />
+          <Property Name="lastName" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" a:GetterAccess="Protected" xmlns:a="http://schemas.microsoft.com/ado/2006/04/codegeneration" a:SetterAccess="Protected" />
+          <Property Name="creditName" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" a:GetterAccess="Protected" xmlns:a="http://schemas.microsoft.com/ado/2006/04/codegeneration" a:SetterAccess="Protected" />
+          <Property Name="phone" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" a:GetterAccess="Protected" xmlns:a="http://schemas.microsoft.com/ado/2006/04/codegeneration" a:SetterAccess="Protected" />
+          <Property Name="mail" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" a:GetterAccess="Protected" xmlns:a="http://schemas.microsoft.com/ado/2006/04/codegeneration" a:SetterAccess="Protected" />
+          <NavigationProperty Name="RentedCars" Relationship="Self.FK__RentedCar__Costu__3F466844" FromRole="Costumer" ToRole="RentedCars" />
+        </EntityType>
+        <EntityType Name="PrivateCar" BaseType="FleetMSModel.Veichle">
+          </EntityType>
+        <EntityType Name="RentedCars">
+          <Key>
+            <PropertyRef Name="licenseNumber" />
+          </Key>
+          <Property Name="licenseNumber" Type="String" MaxLength="12" FixedLength="false" Unicode="true" Nullable="false" a:GetterAccess="Protected" xmlns:a="http://schemas.microsoft.com/ado/2006/04/codegeneration" a:SetterAccess="Protected" />
+          <Property Name="costumerID" Type="String" MaxLength="20" FixedLength="false" Unicode="true" a:GetterAccess="Protected" xmlns:a="http://schemas.microsoft.com/ado/2006/04/codegeneration" a:SetterAccess="Protected" />
+          <NavigationProperty Name="Costumer" Relationship="Self.FK__RentedCar__Costu__3F466844" FromRole="RentedCars" ToRole="Costumer" />
+          <NavigationProperty Name="Veichle" Relationship="Self.FK__RentedCar__licen__3E52440B" FromRole="RentedCars" ToRole="Veichle" />
+        </EntityType>
+        <EntityType Name="Tender" BaseType="FleetMSModel.Commercial">
+          <Property Name="box" Type="Boolean" Nullable="false" a:GetterAccess="Protected" xmlns:a="http://schemas.microsoft.com/ado/2006/04/codegeneration" a:SetterAccess="Protected" />
+        </EntityType>
+        <EntityType Name="Truck" BaseType="FleetMSModel.Commercial">
+          <Property Name="truckType" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" a:GetterAccess="Protected" xmlns:a="http://schemas.microsoft.com/ado/2006/04/codegeneration" a:SetterAccess="Protected" />
+        </EntityType>
+        <EntityType Name="Van" BaseType="FleetMSModel.Veichle">
+          <Property Name="volume" Type="Int32" Nullable="false" a:GetterAccess="Protected" xmlns:a="http://schemas.microsoft.com/ado/2006/04/codegeneration" a:SetterAccess="Protected" />
+          <Property Name="awning" Type="Boolean" annotation:StoreGeneratedPattern="None" Nullable="false" a:GetterAccess="Protected" xmlns:a="http://schemas.microsoft.com/ado/2006/04/codegeneration" a:SetterAccess="Protected" />
+        </EntityType>
+        <EntityType Name="Veichle" Abstract="true" a:TypeAccess="Public" xmlns:a="http://schemas.microsoft.com/ado/2006/04/codegeneration">
+          <Key>
+            <PropertyRef Name="licenseNumber" />
+          </Key>
+          <Property Name="name" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" a:GetterAccess="Protected" a:SetterAccess="Protected" />
+          <Property Name="licenseNumber" Type="String" MaxLength="12" FixedLength="false" Unicode="true" Nullable="false" a:GetterAccess="Protected" a:SetterAccess="Protected" />
+          <Property Name="model" Type="Int32" Nullable="false" a:SetterAccess="Protected" a:GetterAccess="Protected" />
+          <Property Name="price" Type="Int32" Nullable="false" a:GetterAccess="Protected" a:SetterAccess="Protected" />
+          <Property Name="seatsNumber" Type="Int32" Nullable="false" a:GetterAccess="Protected" a:SetterAccess="Protected" />
+          <Property Name="company" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" a:GetterAccess="Protected" a:SetterAccess="Protected" />
+          <NavigationProperty Name="RentedCars" Relationship="Self.FK__RentedCar__licen__3E52440B" FromRole="Veichle" ToRole="RentedCars" />
+        </EntityType>
+        <Association Name="FK__RentedCar__Costu__3F466844">
+          <End Role="Costumer" Type="Self.Costumer" Multiplicity="0..1" />
+          <End Role="RentedCars" Type="Self.RentedCars" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Costumer">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="RentedCars">
+              <PropertyRef Name="costumerID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__RentedCar__licen__3E52440B">
+          <End Role="Veichle" Type="Self.Veichle" Multiplicity="1" />
+          <End Role="RentedCars" Type="Self.RentedCars" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Veichle">
+              <PropertyRef Name="licenseNumber" />
+            </Principal>
+            <Dependent Role="RentedCars">
+              <PropertyRef Name="licenseNumber" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="FleetMSEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Costumer" EntityType="Self.Costumer" />
+          <EntitySet Name="RentedCars" EntityType="Self.RentedCars" />
+          <EntitySet Name="Veichle" EntityType="Self.Veichle" a:GetterAccess="Internal" xmlns:a="http://schemas.microsoft.com/ado/2006/04/codegeneration" />
+          <AssociationSet Name="FK__RentedCar__Costu__3F466844" Association="Self.FK__RentedCar__Costu__3F466844">
+            <End Role="Costumer" EntitySet="Costumer" />
+            <End Role="RentedCars" EntitySet="RentedCars" />
+          </AssociationSet>
+          <AssociationSet Name="FK__RentedCar__licen__3E52440B" Association="Self.FK__RentedCar__licen__3E52440B">
+            <End Role="Veichle" EntitySet="Veichle" />
+            <End Role="RentedCars" EntitySet="RentedCars" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="FleetMSModelStoreContainer" CdmEntityContainer="FleetMSEntities">
+          <EntitySetMapping Name="Costumer">
+            <EntityTypeMapping TypeName="FleetMSModel.Costumer">
+              <MappingFragment StoreEntitySet="Costumer">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="firstName" ColumnName="firstName" />
+                <ScalarProperty Name="lastName" ColumnName="lastName" />
+                <ScalarProperty Name="creditName" ColumnName="creditName" />
+                <ScalarProperty Name="phone" ColumnName="phone" />
+                <ScalarProperty Name="mail" ColumnName="mail" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="RentedCars">
+            <EntityTypeMapping TypeName="FleetMSModel.RentedCars">
+              <MappingFragment StoreEntitySet="RentedCars">
+                <ScalarProperty Name="licenseNumber" ColumnName="licenseNumber" />
+                <ScalarProperty Name="costumerID" ColumnName="costumerID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Veichle">
+            <EntityTypeMapping TypeName="IsTypeOf(FleetMSModel.Veichle)">
+              <MappingFragment StoreEntitySet="Veichle">
+                <ScalarProperty Name="licenseNumber" ColumnName="licenseNumber" />
+                <ScalarProperty Name="company" ColumnName="company" />
+                <ScalarProperty Name="seatsNumber" ColumnName="seatsNumber" />
+                <ScalarProperty Name="price" ColumnName="price" />
+                <ScalarProperty Name="model" ColumnName="model" />
+                <ScalarProperty Name="name" ColumnName="name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+            <EntityTypeMapping TypeName="IsTypeOf(FleetMSModel.Commercial)">
+              <MappingFragment StoreEntitySet="Commercial">
+                <ScalarProperty Name="licenseNumber" ColumnName="licenseNumber" />
+                <ScalarProperty Name="hook" ColumnName="hook" />
+              </MappingFragment>
+            </EntityTypeMapping>
+            <EntityTypeMapping TypeName="IsTypeOf(FleetMSModel.PrivateCar)">
+              <MappingFragment StoreEntitySet="PrivateCar" >
+                <ScalarProperty Name="licenseNumber" ColumnName="licenseNumber" />
+              </MappingFragment>
+            </EntityTypeMapping>
+            <EntityTypeMapping TypeName="IsTypeOf(FleetMSModel.Van)">
+              <MappingFragment StoreEntitySet="Van">
+                <ScalarProperty Name="licenseNumber" ColumnName="licenseNumber" />
+                <ScalarProperty Name="awning" ColumnName="awning" />
+                <ScalarProperty Name="volume" ColumnName="volume" />
+              </MappingFragment>
+            </EntityTypeMapping>
+            <EntityTypeMapping TypeName="IsTypeOf(FleetMSModel.Tender)">
+              <MappingFragment StoreEntitySet="Tender">
+                <ScalarProperty Name="licenseNumber" ColumnName="licenseNumber" />
+                <ScalarProperty Name="box" ColumnName="box" />
+              </MappingFragment>
+            </EntityTypeMapping>
+            <EntityTypeMapping TypeName="IsTypeOf(FleetMSModel.Truck)">
+              <MappingFragment StoreEntitySet="Truck">
+                <ScalarProperty Name="licenseNumber" ColumnName="licenseNumber" />
+                <ScalarProperty Name="truckType" ColumnName="truckType" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

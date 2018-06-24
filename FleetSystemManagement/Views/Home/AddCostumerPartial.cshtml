@@ -1,0 +1,63 @@
+﻿@model FleetSystemManagement.Models.Costumer
+    
+@Html.AntiForgeryToken()
+
+
+<div class="form-horizontal">
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+    <div class="form-group">
+        <label class="control-label col-md-2" for="Id">ID</label>
+        <div class="col-md-10">
+            <input class="form-control text-box single-line" data-val="true" data-val-number="The field ID is empty." data-val-required="השדה ID נדרש." id="Id" name="Id" type="text" value="" />
+            @Html.ValidationMessageFor(model => model.Id, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label class="control-label col-md-2" for="FirstName">First Name</label>
+        <div class="col-md-10">
+            <input class="form-control text-box single-line" data-val="true"  data-val-required="השדה First Name נדרש." id="FirstName" name="FirstName" type="text" value="" />
+            @Html.ValidationMessageFor(model => model.FirstName, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label class="control-label col-md-2" for="LastName">Last Name</label>
+        <div class="col-md-10">
+            <input class="form-control text-box single-line" data-val="true"  data-val-required="השדה Last Name נדרש." id="LastName" name="LastName" type="text" value="" />
+            @Html.ValidationMessageFor(model => model.LastName, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label class="control-label col-md-2" for="CreditName">Credit Card</label>
+        <div class="col-md-10">
+            <input class="form-control text-box single-line" data-val="true" data-val-number="The field Credit Card is empty." data-val-required="השדה Credit Card נדרש." id="CreditName" name="CreditName" type="text" value="" />
+            @Html.ValidationMessageFor(model => model.CreditName, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Phone, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            <input class="form-control text-box single-line" data-val="true" data-val-number="The field Phone is empty." data-val-required="השדה Phone נדרש." id="Phone" name="Phone" type="text" value="" />
+            @Html.ValidationMessageFor(model => model.Phone, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Mail, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            <input class="form-control text-box single-line" data-val="true"  data-val-required="השדה Mail נדרש." id="Mail" name="Mail" type="text" value="" />
+            @Html.ValidationMessageFor(model => model.Mail, "", new { @class = "text-danger" })
+        </div>
+    </div>
+    <div class="form-group">
+        <br />
+        <br />
+        <div class="col-md-offset-2 col-md-10">
+            <a href="#" class="btn btn-primary " onclick="AddCostumer()">Add Costmer</a>
+        </div>
+    </div>
+</div>

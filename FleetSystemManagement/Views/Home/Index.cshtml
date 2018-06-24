@@ -1,0 +1,604 @@
+﻿@using FleetSystemManagement.Models
+
+
+@{
+    ViewBag.Title = "Home Page";
+}
+
+@Html.AntiForgeryToken()
+
+<div class="jumbotron">
+    <h1>Fleet Management System</h1>
+</div>
+<hr />
+
+<div style="float:right; width:200px;height:500px; border-style:solid;border-color:lightgray;border-width: 6px;border-radius: 12px;  ">
+    <h3>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        Menu
+    </h3>
+    <a href="#" class="btn btn-group-lg col-md-12" id="showAddCostumer" onclick="showOrHide(event)">Add Costumer</a>
+    <a href="#" class="btn btn-group-lg col-md-12" id="showRemoveCostumer" onclick="showOrHide(event)">Remove Costumer</a>
+    <a href="#" class="btn btn-group-lg col-md-12" id="showAddPrivateCar" onclick="showOrHide(event)">Add Private Car</a>
+    <a href="#" class="btn btn-group-lg col-md-12" id="showAddTender" onclick="showOrHide(event)">Add Tender</a>
+    <a href="#" class="btn btn-group-lg col-md-12" id="showAddTruck" onclick="showOrHide(event)">Add Truck</a>
+    <a href="#" class="btn btn-group-lg col-md-12" id="showAddVan" onclick="showOrHide(event)">Add Van</a>
+    <a href="#" class="btn btn-group-lg col-md-12" id="showRemoveCar" onclick="showOrHide(event)">Remove Car</a>
+    <a href="#" class="btn btn-group-lg col-md-12" id="showEditCar" onclick="showOrHide(event)">Edit Car</a>
+    <a href="#" class="btn btn-group-lg col-md-12" id="showSearchCar" onclick="showOrHide(event)">Search Car</a>
+    <a href="#" class="btn btn-group-lg col-md-12" id="showRentCar" onclick="showOrHide(event)">Rent Car</a>
+    <a href="#" class="btn btn-group-lg col-md-12" id="showRemoveRentCar" onclick="showOrHide(event)">Remove Rented Car</a>
+</div>
+
+<div id="BeginDiv">
+    <h2>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Please select a option from the menu. </h2>
+</div>
+
+<div id="AddCostumer" style="float:left;  display:none;">
+    <form id="form1" role="form">
+        @Html.Partial("AddCostumerPartial")
+    </form>
+</div>
+
+<div id="RemoveCostumer" style="float:left;  display:none;">
+    <form id="form2" role="form">
+        @Html.Partial("RemoveCostumerPartial")
+    </form>
+</div>
+
+<div id="AddPrivateCar" style="float:left; display:none; ">
+    <form id="form3" role="form">
+        @Html.Partial("AddPrivateCarPartial")
+    </form>
+</div>
+
+<div id="AddTender" style="float:left;  display:none;">
+    <form id="form4" role="form">
+        @Html.Partial("AddTenderPartial")
+    </form>
+</div>
+
+<div id="AddTruck" style="float:left;  display:none;">
+    <form id="form5" role="form">
+        @Html.Partial("AddTruckPartial")
+        <input type="hidden" id="hiddenField" value="AddTruck">
+    </form>
+</div>
+
+<div id="AddVan" style="float:left; display:none; ">
+    <form id="form6" role="form">
+        @Html.Partial("AddVanPartial")
+    </form>
+</div>
+
+<div id="RemoveCar" style="float:left; display:none; ">
+    <form id="form7" role="form">
+        @Html.Partial("RemoveCarPartial")
+    </form>
+</div>
+
+<div id="EditCar" style="float:left;  display:none;">
+    @Html.Partial("EditCarPartial")
+</div>
+
+<div id="SearchCar" style="float:left; display:none; ">
+    <form id="form9" role="form">
+        @Html.Partial("SearchCarPartial")
+    </form>
+</div>
+
+
+<div id="RentCar" style="float:left; display:none; ">
+    <form id="form10" role="form">
+        @Html.Partial("RentCarPartial")
+    </form>
+</div>
+
+
+<div id="RemoveRentCar" style="float:left;  display:none;">
+    <form id="form11" role="form">
+        @Html.Partial("RemoveRentedCarPartial")
+    </form>
+</div>
+
+<script src="~/Scripts/sweetalert.min.js"></script>
+
+<script>
+
+    var showOrHide = function () {
+        var data = event.target.id;
+        $("#AddCostumer").hide();
+        $("#BeginDiv").hide();
+        $("#RemoveCostumer").hide();
+        $("#AddPrivateCar").hide();
+        $("#AddTender").hide();
+        $("#AddTruck").hide();
+        $("#AddVan").hide();
+        $("#RemoveCar").hide();
+        $("#EditCar").hide();
+        $("#SearchCar").hide();
+        $("#RentCar").hide();
+        $("#RemoveRentCar").hide();
+        $("#EditSomeCar").show();
+        $("#EditingDiv").hide();
+        $("#HideEdit1").hide();
+        $("#HideEdit2").hide();
+        $("#HideEdit3").hide();
+        $("#HideEdit4").hide();
+        $("#HideEdit5").hide();
+
+        $("#" + data.substring(4)).show();
+
+    }
+
+    var AddTender = function () {
+        //debugger
+        var data = $("#form4").serialize();
+
+        if (!$("#form4").valid()) {
+            return false;
+        }
+        $.ajax({
+            type: 'POST',
+            url: "/Home/AddTender",
+            data: data,
+
+            success: function (result) {
+                //debugger
+                if (result == 0) {
+                    swal(
+                       'car added successfully!',
+                       ' ',
+                       'success'
+                        );
+                }
+                else {
+                    if (result == 1) {
+                        swal(
+                           'The license number already exist. Try again.',
+                           ' ',
+                           'error'
+                            );
+                    }
+                }
+                $('#form4')[0].reset();
+
+            }
+        });
+    }
+
+    var AddTruck = function () {
+        //debugger
+        var data = $("#form5").serialize();
+
+        if (!$("#form5").valid()) {
+            return false;
+        }
+        $.ajax({
+            type: 'POST',
+            url: "/Home/AddTruck",
+            data: data,
+
+            success: function (result) {
+                //debugger
+                if (result == 0) {
+                    swal(
+                       'car added successfully!',
+                       ' ',
+                       'success'
+                        );
+                }
+                else {
+                    if (result == 1) {
+                        swal(
+                           'The license number already exist. Try again.',
+                           ' ',
+                           'error'
+                            );
+                    }
+                }
+                $('#form5')[0].reset();
+
+            }
+        });
+    }
+
+    var AddVan = function () {
+        var data = $("#form6").serialize();
+
+        if (!$("#form6").valid()) {
+            return false;
+        }
+        $.ajax({
+            type: 'POST',
+            url: "/Home/AddVan",
+            data: data,
+
+            success: function (result) {
+                //debugger
+                if (result == 0) {
+                    swal(
+                       'car added successfully!',
+                       ' ',
+                       'success'
+                        );
+                }
+                else {
+                    if (result == 1) {
+                        swal(
+                           'The license number already exist. Try again.',
+                           ' ',
+                           'error'
+                            );
+                    }
+                }
+                $('#form6')[0].reset();
+            }
+        });
+    }
+
+    var RemoveCar = function () {
+        debugger
+        if (!$("#form7").valid()) {
+            return false;
+        }
+        var data1 = $("#form7").serialize().split("=");
+        var data = data1[1];
+        $.ajax({
+            type: 'POST',
+            url: "/Home/RemoveCar/?data=" + data,
+
+            success: function (result) {
+                //debugger
+                if (result == 0) {
+                    swal(
+                       'Car Removed successfully!',
+                       ' ',
+                       'success'
+                        );
+                }
+                if (result == 1) {
+                    swal(
+                       'The license car is not exist. Try again.',
+                       ' ',
+                       'error'
+                        );
+                }
+                if (result == 2) {
+                    swal(
+                       'The car is rent to costumer. Try to remove renting first.',
+                       ' ',
+                       'error'
+                        );
+                }
+                $('#form7')[0].reset();
+            }
+        });
+
+    }
+
+    var EditCar = function () {
+        debugger
+        var data = $("#Editingform").serialize();
+
+        if (!$("#Editingform").valid()) {
+            return false;
+        }
+        $.ajax({
+            type: 'POST',
+            url: "/Home/EditCar/?" + "name=" + $("#NameFieldID").val() + "&ln=" + $("#LicenseNumberFieldID").val() +
+                "&model=" + $("#ModelFieldID").val() + "&price=" + $("#PriceFieldID").val() + "&seatsNumber=" +
+                $("#SeatsNumberFieldID").val() + "&company=" + $("#CompanyFieldID").val() + "&hook=" + $("#HookFieldID").val() + "&box=" + $("#BoxFieldID").val() +
+          "&trucktype=" + $("#TruckTypeFieldID").val() + "&awning=" + $("#AwningFieldID").val() + "&volume=" + $("#VolumeFieldID").val(),
+
+            success: function (result) {
+                //debugger
+                if (result == 0) {
+                    swal(
+                       'Update successfully!',
+                       ' ',
+                       'success'
+                        );
+                }
+                else {
+                    if (result == 1) {
+                        swal(
+                           'Something goes wrong... Try again.',
+                           ' ',
+                           'error'
+                            );
+                    }
+                }
+                $('#Editingform')[0].reset();
+                $("#EditingDiv").hide();
+                $("#HideEdit1").hide();
+                $("#HideEdit2").hide();
+                $("#HideEdit3").hide();
+                $("#HideEdit4").hide();
+                $("#HideEdit5").hide();
+            }
+        });
+
+    }
+
+    var RentCar = function () {
+        //debugger
+        if (!$("#form10").valid()) {
+            return false;
+        }
+        var ln = $("#RentLicenseNumber").val();
+        var id = $("#RentID").val();
+        $.ajax({
+            type: 'POST',
+            url: "/Home/RentCar/?ln=" + ln + "&id=" + id,
+
+            success: function (result) {
+                //debugger
+                if (result == 0) {
+                    swal(
+                       'Car rented successfully!',
+                       ' ',
+                       'success'
+                        );
+                }
+                if (result == 1) {
+                    swal(
+                       'The license key or id is not exist. Try again.',
+                       ' ',
+                       'error'
+                        );
+                }
+                if (result == 2) {
+                    swal(
+                       'Costumer already rent a car.',
+                       ' ',
+                       'error'
+                        );
+                }
+                $('#form10')[0].reset();
+            }
+        });
+    }
+
+    var RemoveRentCar = function () {
+        debugger
+        if (!$("#form11").valid()) {
+            return false;
+        }
+        var ln = $("#RemoveRentLicenseNumber").val();
+        var id = $("#RemoveRentID").val();
+        $.ajax({
+            type: 'POST',
+            url: "/Home/RemoveRentCar/?ln=" + ln + "&id=" + id,
+
+            success: function (result) {
+                //debugger
+                if (result == 0) {
+                    swal(
+                       'Update successfully!',
+                       ' ',
+                       'success'
+                        );
+                }
+                else {
+                    if (result == 1) {
+                        swal(
+                           'Something goes wrong.. Try again.',
+                           ' ',
+                           'error'
+                            );
+                    }
+                }
+                $('#form11')[0].reset();
+            }
+        });
+    }
+
+    var SearchCar = function () {
+        if (!$("#form9").valid()) {
+            return false;
+        }
+        //debugger
+        var data = $("#LN1").val();
+        $.ajax({
+            type: 'POST',
+            url: "/Home/searchCar?data="+data,
+
+            success: function (result) {
+                if (result == 0) {
+                    swal(
+                       'This car is found in the system!',
+                       ' ',
+                       'success'
+                        );
+                }
+                if (result == 1) {
+                    swal(
+                       'Car not found in the system.',
+                       ' ',
+                       'error'
+                        );
+                }
+                $('#form9')[0].reset();
+            }
+        });
+    }
+
+    var BeforeEditCar = function () {
+        var data = $("#EditLN").val();
+
+        if (data == "" || data == null) {
+            return false;
+        }
+        $.ajax({
+            type: 'POST',
+            url: "/Home/checkEditLicenseNumber/?data=" + data,
+
+            success: function (result) {
+                //debugger
+
+                if (result == -1) {
+                    swal(
+                       'The license number not exist. Try again.',
+                       ' ',
+                       'error'
+                        );
+                }
+                else {
+                    debugger
+                    $("#EditSomeCar").hide();
+                    $("#EditingDiv").show();
+
+                    var res = result.split("=");
+                    $("#NameFieldID").val(res[1]);
+                    $("#LicenseNumberFieldID").val(res[2]);
+                    $("#ModelFieldID").val(res[3]);
+                    $("#PriceFieldID").val(res[4]);
+                    $("#SeatsNumberFieldID").val(res[5]);
+                    $("#CompanyFieldID").val(res[6]);
+                    if (res[0] == "Tender") {
+                        //$("#HookFieldID").val(res[7]);
+                        //$("#BoxFieldID").val(res[8]);
+                        if (res[7] == "True")
+                            $("#HookFieldID").prop('checked', true);
+                        else
+                            $("#HookFieldID").prop('checked', false);
+                        if (res[8] == "True")
+                            $("#BoxFieldID").prop('checked', true);
+                        else
+                            $("#BoxFieldID").prop('checked', false);
+                        $("#HideEdit1").show();
+                        $("#HideEdit2").show();
+                    }
+                    if (res[0] == "Truck") {
+                        //$("#HookFieldID").val(res[7]);
+                        if (res[7] == "True")
+                            $("#HookFieldID").prop('checked', true);
+                        else
+                            $("#HookFieldID").prop('checked', false);
+                        $("#TruckTypeFieldID").val(res[8]);
+                        $("#HideEdit1").show();
+                        $("#HideEdit3").show();
+                    }
+                    if (res[0] == "Van") {
+                       // $("#AwningFieldID").val(res[7]);
+                        if (res[7] == "True")
+                            $("#AwningFieldID").prop('checked', true);
+                        else
+                            $("#AwningFieldID").prop('checked', false);
+                        $("#VolumeFieldID").val(res[8]);
+                        $("#HideEdit4").show();
+                        $("#HideEdit5").show();
+                    }
+                }
+            }
+        });
+
+    }
+
+    var AddCar = function () {
+        //debugger
+        var data = $("#form3").serialize();
+
+        if (!$("#form3").valid()) {
+            return false;
+        }
+        $.ajax({
+            type: 'POST',
+            url: "/Home/AddPrivateCar",
+            data: data,
+
+            success: function (result) {
+                //debugger
+                if (result == 0) {
+                    swal(
+                       'car added successfully!',
+                       ' ',
+                       'success'
+                        );
+                }
+                else {
+                    if (result == 1) {
+                        swal(
+                           'The license number already exist. Try again.',
+                           ' ',
+                           'error'
+                            );
+                    }
+                }
+                $('#form3')[0].reset();
+
+            }
+        });
+    }
+
+    var AddCostumer = function () {
+        if (!$('#form1').valid()) {
+            return false;
+        }
+        var data = $("#form1").serialize();
+        $.ajax({
+            type: 'POST',
+            url: "/Home/AddCostumer",
+            data: data,
+
+            success: function (result) {
+                //debugger
+                if (result == 0) {
+                    swal(
+                       'Costumer Added successfully!',
+                       ' ',
+                       'success'
+                        );
+                }
+                if (result == 1) {
+                    swal(
+                       'The costumer ID is already exist. Try again.',
+                       ' ',
+                       'error'
+                        );
+                }
+                $('#form1')[0].reset();
+            }
+        });
+    }
+
+    var RemoveCostumer = function () {
+        if (!$("#form2").valid()) {
+            return false;
+        }
+        var data = $("#form2").serialize();
+        $.ajax({
+            type: 'POST',
+            url: "/Home/RemoveCostumer",
+            data: data,
+
+            success: function (result) {
+                //debugger
+                if (result == 0) {
+                    swal(
+                       'Costumer Removed successfully!',
+                       ' ',
+                       'success'
+                        );
+                }
+                if (result == 1) {
+                    swal(
+                       'The costumer ID is not exist. Try again.',
+                       ' ',
+                       'error'
+                        );
+                }
+                if (result == 2) {
+                    swal(
+                       'Please remove rented cars first.',
+                       ' ',
+                       'error'
+                        );
+                }
+                $('#form2')[0].reset();
+            }
+        });
+    }
+
+</script>

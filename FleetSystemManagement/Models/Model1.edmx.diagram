@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="4369050ddf6c408ca669fdeb38aefd5f" Name="Diagram1">
+        <EntityTypeShape EntityType="FleetMSModel.Commercial" Width="1.5" PointX="3" PointY="3.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="FleetMSModel.Costumer" Width="1.5" PointX="3.75" PointY="14.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="FleetMSModel.PrivateCar" Width="1.5" PointX="3" PointY="7.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="FleetMSModel.RentedCars" Width="1.5" PointX="6" PointY="8.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="FleetMSModel.Tender" Width="1.5" PointX="5.25" PointY="2.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="FleetMSModel.Truck" Width="1.5" PointX="5.25" PointY="5" IsExpanded="true" />
+        <EntityTypeShape EntityType="FleetMSModel.Van" Width="1.5" PointX="3" PointY="12" IsExpanded="true" />
+        <EntityTypeShape EntityType="FleetMSModel.Veichle" Width="1.5" PointX="0.75" PointY="5.5" IsExpanded="true" />
+        <AssociationConnector Association="FleetMSModel.FK__RentedCar__Costu__3F466844" ManuallyRouted="false" />
+        <AssociationConnector Association="FleetMSModel.FK__RentedCar__licen__3E52440B" ManuallyRouted="false" />
+        <InheritanceConnector EntityType="FleetMSModel.Commercial" />
+        <InheritanceConnector EntityType="FleetMSModel.PrivateCar" />
+        <InheritanceConnector EntityType="FleetMSModel.Van" />
+        <InheritanceConnector EntityType="FleetMSModel.Tender" />
+        <InheritanceConnector EntityType="FleetMSModel.Truck" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

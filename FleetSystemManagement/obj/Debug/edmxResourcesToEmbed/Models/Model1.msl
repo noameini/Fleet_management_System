@@ -1,0 +1,67 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="FleetMSModelStoreContainer" CdmEntityContainer="FleetMSEntities">
+    <EntitySetMapping Name="Costumer">
+      <EntityTypeMapping TypeName="FleetMSModel.Costumer">
+        <MappingFragment StoreEntitySet="Costumer">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="firstName" ColumnName="firstName" />
+          <ScalarProperty Name="lastName" ColumnName="lastName" />
+          <ScalarProperty Name="creditName" ColumnName="creditName" />
+          <ScalarProperty Name="phone" ColumnName="phone" />
+          <ScalarProperty Name="mail" ColumnName="mail" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="RentedCars">
+      <EntityTypeMapping TypeName="FleetMSModel.RentedCars">
+        <MappingFragment StoreEntitySet="RentedCars">
+          <ScalarProperty Name="licenseNumber" ColumnName="licenseNumber" />
+          <ScalarProperty Name="costumerID" ColumnName="costumerID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Veichle">
+      <EntityTypeMapping TypeName="IsTypeOf(FleetMSModel.Veichle)">
+        <MappingFragment StoreEntitySet="Veichle">
+          <ScalarProperty Name="licenseNumber" ColumnName="licenseNumber" />
+          <ScalarProperty Name="company" ColumnName="company" />
+          <ScalarProperty Name="seatsNumber" ColumnName="seatsNumber" />
+          <ScalarProperty Name="price" ColumnName="price" />
+          <ScalarProperty Name="model" ColumnName="model" />
+          <ScalarProperty Name="name" ColumnName="name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+      <EntityTypeMapping TypeName="IsTypeOf(FleetMSModel.Commercial)">
+        <MappingFragment StoreEntitySet="Commercial">
+          <ScalarProperty Name="licenseNumber" ColumnName="licenseNumber" />
+          <ScalarProperty Name="hook" ColumnName="hook" />
+        </MappingFragment>
+      </EntityTypeMapping>
+      <EntityTypeMapping TypeName="IsTypeOf(FleetMSModel.PrivateCar)">
+        <MappingFragment StoreEntitySet="PrivateCar">
+          <ScalarProperty Name="licenseNumber" ColumnName="licenseNumber" />
+        </MappingFragment>
+      </EntityTypeMapping>
+      <EntityTypeMapping TypeName="IsTypeOf(FleetMSModel.Van)">
+        <MappingFragment StoreEntitySet="Van">
+          <ScalarProperty Name="licenseNumber" ColumnName="licenseNumber" />
+          <ScalarProperty Name="awning" ColumnName="awning" />
+          <ScalarProperty Name="volume" ColumnName="volume" />
+        </MappingFragment>
+      </EntityTypeMapping>
+      <EntityTypeMapping TypeName="IsTypeOf(FleetMSModel.Tender)">
+        <MappingFragment StoreEntitySet="Tender">
+          <ScalarProperty Name="licenseNumber" ColumnName="licenseNumber" />
+          <ScalarProperty Name="box" ColumnName="box" />
+        </MappingFragment>
+      </EntityTypeMapping>
+      <EntityTypeMapping TypeName="IsTypeOf(FleetMSModel.Truck)">
+        <MappingFragment StoreEntitySet="Truck">
+          <ScalarProperty Name="licenseNumber" ColumnName="licenseNumber" />
+          <ScalarProperty Name="truckType" ColumnName="truckType" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

@@ -1,0 +1,123 @@
+﻿@model FleetSystemManagement.Models.Veichle
+@using FleetSystemManagement.Models;
+
+<div class="form-horizontal">
+    <div id="EditSomeCar">
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+        <div class="form-group">
+            <label class="control-label col-md-2" for="LicenseNumber">License Number</label>
+            <div class="col-md-10">
+                <input class="form-control text-box single-line" data-val="true" data-val-number="The field License Number is empty." data-val-required="השדה License Number נדרש." id="EditLN" name="LicenseNumber" type="text" value="" />
+                @Html.ValidationMessageFor(model => model.LicenseNumber, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <br />
+            <br />
+            <div class="col-md-offset-2 col-md-10">
+                <a href="#" class="btn btn-primary " onclick="BeforeEditCar()">Edit</a>
+            </div>
+        </div>
+    </div>
+
+    <div id="EditingDiv">
+        <form id="Editingform">
+
+            <div class="form-group">
+                <label class="control-label col-md-2" for="Name">Name</label>
+                <div class="col-md-10">
+                    <input class="form-control text-box single-line" data-val="true" data-val-required="השדה Name נדרש." id="NameFieldID" name="Name" type="text" value="" />
+                    <span class="field-validation-valid text-danger" data-valmsg-for="Name" data-valmsg-replace="true"></span>
+                </div>
+            </div>
+
+            <div class="form-group" style="display:none">
+                <label class="control-label col-md-2" for="LicenseNumber">License Number</label>
+                <div class="col-md-10">
+                    <input class="form-control text-box single-line" data-val="true" data-val-number="The field License Number is empty." data-val-required="השדה License Number נדרש." id="LicenseNumberFieldID" name="LicenseNumber" type="text" value="" />
+                    <span class="field-validation-valid text-danger" data-valmsg-for="LicenseNumber" data-valmsg-replace="true"></span>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="control-label col-md-2" for="Model">Model</label>
+                <div class="col-md-10">
+                    <input class="form-control text-box single-line" data-val="true" data-val-required="השדה Model נדרש." id="ModelFieldID" name="Model" type="number" value="" />
+                    <span class="field-validation-valid text-danger" data-valmsg-for="Model" data-valmsg-replace="true"></span>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="control-label col-md-2" for="Price">Price</label>
+                <div class="col-md-10">
+                    <input class="form-control text-box single-line" data-val="true" data-val-number="The field Price must be a number." data-val-required="השדה Price נדרש." id="PriceFieldID" name="Price" type="number" value="" />
+                    <span class="field-validation-valid text-danger" data-valmsg-for="Price" data-valmsg-replace="true"></span>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="control-label col-md-2" for="SeatsNumber">Seats Number</label>
+                <div class="col-md-10">
+                    <input class="form-control text-box single-line" data-val="true" data-val-number="The field SeatsNumber must be a number." data-val-required="השדה SeatsNumber נדרש." id="SeatsNumberFieldID" name="SeatsNumber" type="number" value="" />
+                    <span class="field-validation-valid text-danger" data-valmsg-for="SeatsNumber" data-valmsg-replace="true"></span>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="control-label col-md-2" for="Company">Company</label>
+                <div class="col-md-10">
+                    <input class="form-control text-box single-line" data-val="true" data-val-required="השדה Company נדרש." id="CompanyFieldID" name="Company" type="text" value="" />
+                    <span class="field-validation-valid text-danger" data-valmsg-for="Company" data-valmsg-replace="true"></span>
+                </div>
+            </div>
+
+            <div class="form-group" id="HideEdit1">
+                <label class="control-label col-md-2" for="Hook">Hook</label>
+                <div class="col-md-10">
+                    <input class="form-control check-box" data-val="true" data-val-required="השדה Hook נדרש." id="HookFieldID" name="Hook" type="checkbox" value="true" /><input name="Hook" id="Hook" type="hidden" value="" />
+                </div>
+            </div>
+
+            <div class="form-group" id="HideEdit2">
+                <label class="control-label col-md-2" for="Box">Box</label>
+                <div class="col-md-10">
+                    <input class="form-control check-box" data-val="true" data-val-required="השדה Box נדרש." id="BoxFieldID" name="Box" type="checkbox" value="true" /><input name="Box" id="Box" type="hidden" value="" />
+                </div>
+            </div>
+
+            <div class="form-group" id="HideEdit3">
+                <label class="control-label col-md-2" for="TruckType">Truck Type</label>
+                <div class="col-md-10">
+                    <input class="form-control text-box single-line" data-val="true" data-val-required="השדה TruckType נדרש." id="TruckTypeFieldID" name="TruckType" type="text" value="" />
+                    <span class="field-validation-valid text-danger" data-valmsg-for="TruckType" data-valmsg-replace="true"></span>
+                </div>
+            </div>
+
+            <div class="form-group" id="HideEdit4">
+                <label class="control-label col-md-2" for="Awning">Awning</label>
+                <div class="col-md-10">
+                    <input class="form-control check-box" data-val="true" data-val-required="השדה Awning נדרש." id="AwningFieldID" name="Awning" type="checkbox" value="true" /><input name="Awning" type="hidden" value="" />
+                    <span class="field-validation-valid text-danger" data-valmsg-for="Awning" data-valmsg-replace="true"></span>
+                </div>
+            </div>
+
+            <div class="form-group" id="HideEdit5">
+                <label class="control-label col-md-2" for="Volume">Volume</label>
+                <div class="col-md-10">
+                    <input class="form-control text-box single-line" data-val="true" data-val-number="The field Volume must be a number." data-val-required="השדה Volume נדרש." id="VolumeFieldID" name="Volume" type="number" value="" />
+                    <span class="field-validation-valid text-danger" data-valmsg-for="Volume" data-valmsg-replace="true"></span>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <br />
+                <br />
+                <div class="col-md-offset-2 col-md-10">
+                    <a href="#" class="btn btn-primary " onclick="EditCar()">Edit</a>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

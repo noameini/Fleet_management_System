@@ -1,0 +1,21 @@
+﻿@model FleetSystemManagement.Models.Veichle
+
+<div class="form-horizontal">
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+    <div class="form-group">
+        <label class="control-label col-md-2" for="LicenseNumber">License Number</label>
+        <div class="col-md-10">
+            <input class="form-control text-box single-line" data-val="true" data-val-number="The field License Number is empty." data-val-required="השדה License Number נדרש." id="LicenseNumber" name="LicenseNumber" type="text" value="" />
+            @Html.ValidationMessageFor(model => model.LicenseNumber, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        <br />
+        <br />
+        <div class="col-md-offset-2 col-md-10">
+            <a href="#" class="btn btn-primary " onclick="RemoveCar()">Remove Car</a>
+        </div>
+    </div>
+</div>

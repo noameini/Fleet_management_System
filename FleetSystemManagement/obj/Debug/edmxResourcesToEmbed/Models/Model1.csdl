@@ -1,0 +1,87 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="FleetMSModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Commercial" BaseType="FleetMSModel.Veichle" Abstract="true">
+    <Property Name="hook" Type="Boolean" Nullable="false" a:GetterAccess="Protected" xmlns:a="http://schemas.microsoft.com/ado/2006/04/codegeneration" a:SetterAccess="Protected" />
+  </EntityType>
+  <EntityType Name="Costumer">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" a:GetterAccess="Protected" xmlns:a="http://schemas.microsoft.com/ado/2006/04/codegeneration" a:SetterAccess="Protected" />
+    <Property Name="firstName" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" a:SetterAccess="Protected" xmlns:a="http://schemas.microsoft.com/ado/2006/04/codegeneration" a:GetterAccess="Protected" />
+    <Property Name="lastName" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" a:GetterAccess="Protected" xmlns:a="http://schemas.microsoft.com/ado/2006/04/codegeneration" a:SetterAccess="Protected" />
+    <Property Name="creditName" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" a:GetterAccess="Protected" xmlns:a="http://schemas.microsoft.com/ado/2006/04/codegeneration" a:SetterAccess="Protected" />
+    <Property Name="phone" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" a:GetterAccess="Protected" xmlns:a="http://schemas.microsoft.com/ado/2006/04/codegeneration" a:SetterAccess="Protected" />
+    <Property Name="mail" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" a:GetterAccess="Protected" xmlns:a="http://schemas.microsoft.com/ado/2006/04/codegeneration" a:SetterAccess="Protected" />
+    <NavigationProperty Name="RentedCars" Relationship="Self.FK__RentedCar__Costu__3F466844" FromRole="Costumer" ToRole="RentedCars" />
+  </EntityType>
+  <EntityType Name="PrivateCar" BaseType="FleetMSModel.Veichle" />
+  <EntityType Name="RentedCars">
+    <Key>
+      <PropertyRef Name="licenseNumber" />
+    </Key>
+    <Property Name="licenseNumber" Type="String" MaxLength="12" FixedLength="false" Unicode="true" Nullable="false" a:GetterAccess="Protected" xmlns:a="http://schemas.microsoft.com/ado/2006/04/codegeneration" a:SetterAccess="Protected" />
+    <Property Name="costumerID" Type="String" MaxLength="20" FixedLength="false" Unicode="true" a:GetterAccess="Protected" xmlns:a="http://schemas.microsoft.com/ado/2006/04/codegeneration" a:SetterAccess="Protected" />
+    <NavigationProperty Name="Costumer" Relationship="Self.FK__RentedCar__Costu__3F466844" FromRole="RentedCars" ToRole="Costumer" />
+    <NavigationProperty Name="Veichle" Relationship="Self.FK__RentedCar__licen__3E52440B" FromRole="RentedCars" ToRole="Veichle" />
+  </EntityType>
+  <EntityType Name="Tender" BaseType="FleetMSModel.Commercial">
+    <Property Name="box" Type="Boolean" Nullable="false" a:GetterAccess="Protected" xmlns:a="http://schemas.microsoft.com/ado/2006/04/codegeneration" a:SetterAccess="Protected" />
+  </EntityType>
+  <EntityType Name="Truck" BaseType="FleetMSModel.Commercial">
+    <Property Name="truckType" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" a:GetterAccess="Protected" xmlns:a="http://schemas.microsoft.com/ado/2006/04/codegeneration" a:SetterAccess="Protected" />
+  </EntityType>
+  <EntityType Name="Van" BaseType="FleetMSModel.Veichle">
+    <Property Name="volume" Type="Int32" Nullable="false" a:GetterAccess="Protected" xmlns:a="http://schemas.microsoft.com/ado/2006/04/codegeneration" a:SetterAccess="Protected" />
+    <Property Name="awning" Type="Boolean" annotation:StoreGeneratedPattern="None" Nullable="false" a:GetterAccess="Protected" xmlns:a="http://schemas.microsoft.com/ado/2006/04/codegeneration" a:SetterAccess="Protected" />
+  </EntityType>
+  <EntityType Name="Veichle" Abstract="true" a:TypeAccess="Public" xmlns:a="http://schemas.microsoft.com/ado/2006/04/codegeneration">
+    <Key>
+      <PropertyRef Name="licenseNumber" />
+    </Key>
+    <Property Name="name" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" a:GetterAccess="Protected" a:SetterAccess="Protected" />
+    <Property Name="licenseNumber" Type="String" MaxLength="12" FixedLength="false" Unicode="true" Nullable="false" a:GetterAccess="Protected" a:SetterAccess="Protected" />
+    <Property Name="model" Type="Int32" Nullable="false" a:SetterAccess="Protected" a:GetterAccess="Protected" />
+    <Property Name="price" Type="Int32" Nullable="false" a:GetterAccess="Protected" a:SetterAccess="Protected" />
+    <Property Name="seatsNumber" Type="Int32" Nullable="false" a:GetterAccess="Protected" a:SetterAccess="Protected" />
+    <Property Name="company" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" a:GetterAccess="Protected" a:SetterAccess="Protected" />
+    <NavigationProperty Name="RentedCars" Relationship="Self.FK__RentedCar__licen__3E52440B" FromRole="Veichle" ToRole="RentedCars" />
+  </EntityType>
+  <Association Name="FK__RentedCar__Costu__3F466844">
+    <End Role="Costumer" Type="Self.Costumer" Multiplicity="0..1" />
+    <End Role="RentedCars" Type="Self.RentedCars" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Costumer">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="RentedCars">
+        <PropertyRef Name="costumerID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__RentedCar__licen__3E52440B">
+    <End Role="Veichle" Type="Self.Veichle" Multiplicity="1" />
+    <End Role="RentedCars" Type="Self.RentedCars" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="Veichle">
+        <PropertyRef Name="licenseNumber" />
+      </Principal>
+      <Dependent Role="RentedCars">
+        <PropertyRef Name="licenseNumber" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="FleetMSEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Costumer" EntityType="Self.Costumer" />
+    <EntitySet Name="RentedCars" EntityType="Self.RentedCars" />
+    <EntitySet Name="Veichle" EntityType="Self.Veichle" a:GetterAccess="Internal" xmlns:a="http://schemas.microsoft.com/ado/2006/04/codegeneration" />
+    <AssociationSet Name="FK__RentedCar__Costu__3F466844" Association="Self.FK__RentedCar__Costu__3F466844">
+      <End Role="Costumer" EntitySet="Costumer" />
+      <End Role="RentedCars" EntitySet="RentedCars" />
+    </AssociationSet>
+    <AssociationSet Name="FK__RentedCar__licen__3E52440B" Association="Self.FK__RentedCar__licen__3E52440B">
+      <End Role="Veichle" EntitySet="Veichle" />
+      <End Role="RentedCars" EntitySet="RentedCars" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>
