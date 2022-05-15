@@ -1,4 +1,4 @@
-﻿@using FleetSystemManagement.Models
+@using FleetSystemManagement.Models
 
 
 @{
@@ -34,68 +34,68 @@
     <h2>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Please select a option from the menu. </h2>
 </div>
 
-<div id="AddCostumer" style="float:left;  display:none;">
+<div id="AddCostumer" class="toggle-panel" style="float:left;  display:none;">
     <form id="form1" role="form">
         @Html.Partial("AddCostumerPartial")
     </form>
 </div>
 
-<div id="RemoveCostumer" style="float:left;  display:none;">
+<div id="RemoveCostumer" class="toggle-panel" style="float:left;  display:none;">
     <form id="form2" role="form">
         @Html.Partial("RemoveCostumerPartial")
     </form>
 </div>
 
-<div id="AddPrivateCar" style="float:left; display:none; ">
+<div id="AddPrivateCar" class="toggle-panel" style="float:left; display:none; ">
     <form id="form3" role="form">
         @Html.Partial("AddPrivateCarPartial")
     </form>
 </div>
 
-<div id="AddTender" style="float:left;  display:none;">
+<div id="AddTender" class="toggle-panel" style="float:left;  display:none;">
     <form id="form4" role="form">
         @Html.Partial("AddTenderPartial")
     </form>
 </div>
 
-<div id="AddTruck" style="float:left;  display:none;">
+<div id="AddTruck" class="toggle-panel" style="float:left;  display:none;">
     <form id="form5" role="form">
         @Html.Partial("AddTruckPartial")
         <input type="hidden" id="hiddenField" value="AddTruck">
     </form>
 </div>
 
-<div id="AddVan" style="float:left; display:none; ">
+<div id="AddVan" class="toggle-panel" style="float:left; display:none; ">
     <form id="form6" role="form">
         @Html.Partial("AddVanPartial")
     </form>
 </div>
 
-<div id="RemoveCar" style="float:left; display:none; ">
+<div id="RemoveCar" class="toggle-panel" style="float:left; display:none; ">
     <form id="form7" role="form">
         @Html.Partial("RemoveCarPartial")
     </form>
 </div>
 
-<div id="EditCar" style="float:left;  display:none;">
+<div id="EditCar" class="toggle-panel" style="float:left;  display:none;">
     @Html.Partial("EditCarPartial")
 </div>
 
-<div id="SearchCar" style="float:left; display:none; ">
+<div id="SearchCar" class="toggle-panel" style="float:left; display:none; ">
     <form id="form9" role="form">
         @Html.Partial("SearchCarPartial")
     </form>
 </div>
 
 
-<div id="RentCar" style="float:left; display:none; ">
+<div id="RentCar" class="toggle-panel" style="float:left; display:none; ">
     <form id="form10" role="form">
         @Html.Partial("RentCarPartial")
     </form>
 </div>
 
 
-<div id="RemoveRentCar" style="float:left;  display:none;">
+<div id="RemoveRentCar" class="toggle-panel" style="float:left;  display:none;">
     <form id="form11" role="form">
         @Html.Partial("RemoveRentedCarPartial")
     </form>
@@ -104,28 +104,9 @@
 <script src="~/Scripts/sweetalert.min.js"></script>
 
 <script>
-
     var showOrHide = function () {
         var data = event.target.id;
-        $("#AddCostumer").hide();
-        $("#BeginDiv").hide();
-        $("#RemoveCostumer").hide();
-        $("#AddPrivateCar").hide();
-        $("#AddTender").hide();
-        $("#AddTruck").hide();
-        $("#AddVan").hide();
-        $("#RemoveCar").hide();
-        $("#EditCar").hide();
-        $("#SearchCar").hide();
-        $("#RentCar").hide();
-        $("#RemoveRentCar").hide();
-        $("#EditSomeCar").show();
-        $("#EditingDiv").hide();
-        $("#HideEdit1").hide();
-        $("#HideEdit2").hide();
-        $("#HideEdit3").hide();
-        $("#HideEdit4").hide();
-        $("#HideEdit5").hide();
+        $(".toggle-panel").hide();
 
         $("#" + data.substring(4)).show();
 
